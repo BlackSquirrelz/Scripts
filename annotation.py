@@ -19,8 +19,12 @@ exercise_file = argv[1]
 with open(exercise_file, 'r') as document:
     sentences = [sentence for sentence in document]
 
+counter = 1
+stat = len(sentences)
+
 for sentence in sentences:
-    print(f"\nOriginal: {sentence}\n")
+    print(f"\nOriginal: {sentence}")
+    print(f"Satz nummer {counter} von {stat}\n")
     print("-" * 50)
     print()
     doc = nlp(sentence)
@@ -29,6 +33,10 @@ for sentence in sentences:
         print(f"{token.text} \t {token.pos_} \t {token.dep_}")
     print()
     print("="*50)
+    counter += 1
+
+if counter == stat:
+    print("Annotation Finished.")
 
 
 
