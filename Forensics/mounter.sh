@@ -1,8 +1,12 @@
 #!/bin/zsh
 
+image=$1
 
-file=$1
-n=$2
+echo "Attempt to Attach Image $image"
 
-hexdump -n $n -C $file
+hdiutil attach -noverify -noautofsck $image -shadow
+
+echo "Success"
+
+
 
