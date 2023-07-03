@@ -1,6 +1,6 @@
 # Scripts
 
-A collection of scripts.
+A collection of scripts and proof of concepts. PoC.
 
 ---
 
