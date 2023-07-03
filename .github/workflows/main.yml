@@ -1,6 +1,19 @@
+name: PoC script
+
+on:
+  push:
+    branches:
+      - main  # Change to the branch you want to trigger the action on
+
 jobs:
-  example-job:
+  execute-script:
+    runs-on: ubuntu-latest  # Choose the operating system you prefer
+
     steps:
-      - name: Run build script
-        run: ./.github/script.sh
-        shell: bash
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Execute script
+      run: |
+        chmod +x PoC/script.sh
+        ./PoC/script.sh
