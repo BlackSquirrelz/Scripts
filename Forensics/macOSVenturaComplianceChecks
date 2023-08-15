@@ -1,0 +1,35 @@
+let chapter1Ventura = [
+    "1.1 Ensure All Apple-provided Software Is Current (Automated)": "/usr/bin/sudo defaults read /Library/Preferences/com.apple.SoftwareUpdate | grep -e LastFullSuccessfulDate",
+    "1.2 Ensure Auto Update Is Enabled (Automated)": "/usr/bin/sudo /usr/sbin/softwareupdate -l",
+    "1.3 Ensure Download New Updates When Available Is Enabled (Automated)": "defaults read /Library/Preferences/com.apple.SoftwareUpdate AutomaticDownload",
+    "1.4 Ensure Install of macOS Updates Is Enabled (Automated)": "defaults read /Library/Preferences/com.apple.SoftwareUpdate AutomaticallyInstallMacOSUpdates",
+    "1.5 Ensure Install Application Updates from the App Store Is Enabled (Automated)": "defaults read /Library/Preferences/com.apple.commerce AutoUpdate",
+    "1.6.1 Ensure Install Security Responses and System Files Is Enabled (Automated) - ConfigDataInstall": "defaults read /Library/Preferences/com.apple.SoftwareUpdate ConfigDataInstall",
+    "1.6.2 Ensure Install Security Responses and System Files Is Enabled (Automated) - CriticalUpdateInstall": "defaults read /Library/Preferences/com.apple.SoftwareUpdate CriticalUpdateInstall",
+    "1.7 Ensure Software Update Deferment Is Less Than or Equal to 30 Days (Automated)" : "Not yet implemented"
+]
+
+// Some of these are user specific, need to take them out.
+let chapter2Ventura = [
+    "2.1.1.1 Audit iCloud Keychain (Manual)": "sudo defaults read /Users/aptwi/Library/Preferences/MobileMeAccounts | grep -B 1 KEYCHAIN_SYNC",
+    "2.1.1.2 Audit iCloud Drive (Manual)": "sudo defaults read /Users/aptwi/Library/Preferences/MobileMeAccounts | grep -B 1 MOBILE_DOCUMENTS",
+    "2.1.1.3 Ensure iCloud Drive Document and Desktop Sync Is Disabled (Automated)": "ls -l /Users/aptwi/Library/Mobile\\ Documents/com\\~apple\\~CloudDocs/Desktop | grep total",
+    "2.2.1 Ensure Firewall Is Enabled (Automated)": "sudo defaults read /Library/Preferences/com.apple.alf globalstate",
+    "2.2.2 Ensure Firewall Stealth Mode Is Enabled (Automated)": "/usr/bin/sudo /usr/libexec/ApplicationFirewall/socketfilterfw --getstealthmode",
+    "2.3.1.1 Ensure AirDrop Is Disabled (Automated)": "defaults -currentHost read com.apple.controlcenter.plist",
+    "2.3.1.2 Ensure AirPlay Receiver Is Disabled (Automated)": "defaults -currentHost read com.apple.controlcenter.plist",
+    "2.3.2.1 Ensure Set Time and Date Automatically Is Enabled (Automated)" : "sudo systemsetup -getusingnetworktime",
+    "2.3.3.1 Ensure DVD or CD Sharing Is Disabled (Automated)" : "sudo launchctl list | grep -c com.apple.ODSAgent",
+    "2.3.3.3 Ensure File Sharing Is Disabled (Automated)" : "sudo launchctl list | grep -c com.apple.smbd",
+    "2.3.3.4 Ensure Printer Sharing Is Disabled (Automated)" : "sudo /usr/sbin/cupsctl | grep -c _share_printers",
+    "2.3.3.5 Ensure Remote Login Is Disabled (Automated)" : "sudo systemsetup -getremotelogin",
+    "2.3.3.6 Ensure Remote Management Is Disabled (Automated)" : "sudo ps -ef | grep -e ARDAgent",
+    "2.3.3.7 Ensure Remote Apple Events Is Disabled (Automated)": "sudo systemsetup -getremoteappleevents",
+    "2.3.3.8 Ensure Internet Sharing Is Disabled (Automated)": "sudo defaults read /Library/Preferences/SystemConfiguration/com.apple.nat >nul 2>&1 | grep -c 'Enabled = 1;'",
+    "2.3.3.9 Ensure Content Caching Is Disabled (Automated)": "sudo AssetCacheManagerUtil status",
+    "2.3.3.10 Ensure Media Sharing Is Disabled (Automated)": "sudo defaults read com.apple.amp.mediasharingd home-sharing-enabled",
+    "2.3.3.11 Ensure Bluetooth Sharing Is Disabled (Automated)": "sudo defaults -currentHost read com.apple.Bluetooth PrefKeyServicesEnabled",
+    "2.3.3.12 Ensure Computer Name Does Not Contain PII or Protected Organizational Information (Manual)": "hostname",
+    "2.3.4.1 Ensure Backup Automatically is Enabled If Time Machine Is Enabled (Automated)": "sudo defaults read /Library/Preferences/com.apple.TimeMachine.plist AutoBackup",
+    "2.3.4.2 Ensure Time Machine Volumes Are Encrypted If Time Machine Is Enabled (Automated)": "sudo defaults read /Library/Preferences/com.apple.TimeMachine.plist Destinations | grep LastKnownEncryptionState",
+    "2.4.1 Ensure Show Wi-Fi status in Menu Bar Is Enabled (Automated)": "sudo -u aptwi defaults -currentHost read com.apple.controlcenter WiFi",
