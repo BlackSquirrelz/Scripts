@@ -1,5 +1,5 @@
 # Define the URL of the image
-$imageUrl = "https://drive.google.com/file/d/1uzL_uogUJ83y4SjUJWNlBy2kdmGucp8A/view?usp=sharing"
+$imageUrl = "https://en.wikipedia.org/wiki/WannaCry_ransomware_attack#/media/File:Wana_Decrypt0r_screenshot.png"
 
 # Define the local path where the image will be saved
 $imagePath = "$env:USERPROFILE\Downloads\background.jpg"
