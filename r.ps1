@@ -5,7 +5,7 @@ Get-Process "explorer"| Stop-Process
 
 #Changes Background  
 #URL For the Image of your choice (Wanna Cry Ransomware Background)
-$url = "https://upload.wikimedia.org/wikipedia/en/c/ca/Metropolitan_Police_ransomware_scam.jpg"
+$url = "https://static.wikia.nocookie.net/annoyingorange/images/3/31/Ao_orange_174x252.png/revision/latest?cb=20240113110036"
 
 
 Invoke-WebRequest $url -OutFile C:\temp\test.jpg
@@ -67,4 +67,4 @@ if (!$image) {$image = "None"}
 
 }
 
-MsgBox -m 'Your Computer Has Been Infected' -t "Warning" -b OKCancel -i Warning
+MsgBox -m 'CONGRATULATIONS YOU HAVE WON A FREE SECURITY AWARENESS TRAINING' -t "Warning" -b OKCancel -i Warning
