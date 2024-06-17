@@ -5,7 +5,7 @@ Get-Process "explorer"| Stop-Process
 
 #Changes Background  
 #URL For the Image of your choice (Wanna Cry Ransomware Background)
-$url = "https://github.com/BlackSquirrelz/Scripts/blob/master/wallpaper.jpg"
+$url = "https://raw.githubusercontent.com/BlackSquirrelz/Scripts/master/wallpaper.jpg"
 
 
 Invoke-WebRequest $url -OutFile C:\temp\test.jpg
