@@ -92,6 +92,34 @@ parse_logfile() {
     echo "[+] Parsing completed. Results are stored in $outfile"
 }
 
+# Function to import CSV to SQLite database
+import_csv_to_sqlite() {
+    local csv_file=$1
+    local db_file=$2
+    local table_name="logs"
+
+    echo "[+] Importing CSV ($csv_file) to SQLite database ($db_file)..."
+    
+
+    if [ -z "$csv_file" ] || [ -z "$db_file" ]; then
+        echo "Usage: $0 <csv_file> <db_file>"
+        exit 1
+    fi
+
+    # Create the SQLite database if it doesn't exist
+    if [ ! -f "$db_file" ]; then
+        echo "Creating SQLite database..."
+        sqlite3 "$db_file" "CREATE TABLE $table_name (Date TEXT, Timezone TEXT, Severity TEXT, Components TEXT, Identifier INTEGER, CTX TEXT, SVC TEXT, Message TEXT, Attributes TEXT, Tags TEXT, Truncated TEXT, Size TEXT, IP_Address TEXT, Port TEXT);"
+    fi
+
+    # Import the CSV file into the SQLite database
+    echo "Importing CSV to SQLite database..."
+    sqlite3 -separator ',' "$db_file" ".mode csv" ".import $csv_file $table_name"
+
+    echo "CSV imported to SQLite database."
+}
+
+
 # Check if the required arguments are provided
 if [ $# -lt 4 ]; then
     echo "Usage: $0 -f <logfile> -o <outfile>"
@@ -99,7 +127,7 @@ if [ $# -lt 4 ]; then
 fi
 
 # Parse the command line arguments
-while getopts ":f:o:v" opt; do
+while getopts ":f:o:v:d" opt; do
     case $opt in
         f)
             logfile=$OPTARG
@@ -109,6 +137,9 @@ while getopts ":f:o:v" opt; do
             ;;
         v)
             verbose=true
+            ;;
+        d)
+            database=true
             ;;
         \?)
             echo "Invalid option: -$OPTARG"
@@ -124,3 +155,10 @@ done
 
 # Call the parse_logfile function with the provided arguments
 parse_logfile "$logfile" "$outfile"
+
+if [ $database ]; then
+    echo "[+] Importing CSV to SQLite database..."
+    # Call the import_csv_to_sqlite function with the provided arguments
+    database_file="${outfile%.*}.db"
+    import_csv_to_sqlite "$outfile" $database_file
+fi
